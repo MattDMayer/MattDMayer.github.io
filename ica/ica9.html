@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Click me plz!</button>
+    <button type = "button" onclick="colorSwap()">Don't press me!</button>
+    <script>
+        const butt = document.querySelector("button");
+        butt.addEventListener("click", updateName);
+
+        function updateName(){
+            let name = prompt("Enter a new name goober.");
+            butt.textContent = name;
+        }
+        function colorSwap(){
+            let r = Math.floor(Math.random()*256);
+            let g = Math.floor(Math.random()*256);
+            let b = Math.floor(Math.random()*256);
+            let combine = "rgb(" + r +"," + g + "," +b+")";
+            document.body.style.backgroundColor = combine;
+        }
+    </script>
+</body>
+</html>
