@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js-project</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <link rel="stylesheet" href="js.css">
+</head>
+<body>
+      <h1>Clicking will first spawn and then retrieve ball and record digit.</h1>
+      <h4>Click above the line.</h4>
+      <h4>Make sure the ball is on the ground of the pocket before retrieving it to store number.</h4>
+
+      <h3 id="number">Enter Phone Number: </h3>   
+      <button onClick="window.location.reload();">Refresh Page</button> 
+      <button onClick="window.location.reload();">Submit</button>  
+      <p> </p>
+      <aside onclick="addD()" id="can"></aside>
+    <h2>1 2 3 4 5 6 7 8 9 0</h2>
+    <script>
+        //--scrip.js
+        const Engine = Matter.Engine,
+          Render = Matter.Render,
+          World = Matter.World,
+          Bodies = Matter.Bodies,
+          Body = Matter.Body,
+          Collision = Matter.Collision;
+        // create an engine
+        const engine = Engine.create();
+    
+        // create a renderer
+        const render = Render.create({
+          element: document.getElementById("can"),
+          engine: engine,
+          options: {
+            wireframes: false,
+            background: 'green'
+          }
+        });
+        // create flanges
+        const fOptions = {
+          isStatic: true
+        };
+        const flanges = [
+          //row one
+          Bodies.polygon(45, 150, 3, 20, fOptions),
+          Bodies.polygon(100, 250, 3, 20, fOptions),
+          Bodies.polygon(60, 350, 3, 20, fOptions),
+          Bodies.polygon(100, 450, 3, 20, fOptions),
+          //row two
+          Bodies.polygon(150, 150, 3, 20, fOptions),
+          Bodies.polygon(200, 250, 3, 20, fOptions),
+          Bodies.polygon(150, 350, 3, 20, fOptions),
+          Bodies.polygon(200, 450, 3, 20, fOptions),
+          //row three
+          Bodies.polygon(250, 150, 3, 20, fOptions),
+          Bodies.polygon(300, 250, 3, 20, fOptions),
+          Bodies.polygon(250, 350, 3, 20, fOptions),
+          Bodies.polygon(300, 450, 3, 20, fOptions),
+          //row four
+          Bodies.polygon(350, 150, 3, 20, fOptions),
+          Bodies.polygon(400, 250, 3, 20, fOptions),
+          Bodies.polygon(350, 350, 3, 20, fOptions),
+          Bodies.polygon(400, 450, 3, 20, fOptions),
+          //row five
+          Bodies.polygon(450, 150, 3, 20, fOptions),
+          Bodies.polygon(500, 250, 3, 20, fOptions),
+          Bodies.polygon(450, 350, 3, 20, fOptions),
+          Bodies.polygon(500, 450, 3, 20, fOptions),
+          //row six
+          Bodies.polygon(550, 150, 3, 20, fOptions),
+          Bodies.polygon(600, 250, 3, 20, fOptions),
+          Bodies.polygon(550, 350, 3, 20, fOptions),
+          Bodies.polygon(600, 450, 3, 20, fOptions),
+          //row seven
+          Bodies.polygon(650, 150, 3, 20, fOptions),
+          Bodies.polygon(700, 250, 3, 20, fOptions),
+          Bodies.polygon(650, 350, 3, 20, fOptions),
+          Bodies.polygon(700, 450, 3, 20, fOptions),
+          //row 8
+          Bodies.polygon(755, 150, 3, 20, fOptions),
+          Bodies.polygon(740, 350, 3, 20, fOptions)
+        ];
+        for (i = 0; i < flanges.length; i++) {
+          World.add(engine.world, [flanges[i]]);
+          Body.setAngle(flanges[i], 16.23);
+        }
+        //create catches
+        const cOptions = {
+          isStatic: true
+        };
+        const catches = [Bodies.rectangle(80, 600, 2, 100, cOptions)];
+        xasx = 160;
+        for (v = 0; v < 9; v++) {
+          catches.push(Bodies.rectangle(xasx, 600, 2, 100, cOptions));
+          World.add(engine.world, [catches[v]]);
+          xasx = xasx + 80;
+        }
+        // create disk
+        let disk = [];
+        let count = 0;
+        let phone = 0;
+        document.getElementById("number").innerHTML +="(";
+        const dOptions = {
+          friction: 0.2,
+          restitution: 1
+        };
+    
+        function addD() {
+            let Y=event.clientY;
+            if(Y<=275 && count == 0 && phone < 10)
+            {
+                disk.push(Bodies.circle(event.offsetX, event.offsetY, 20, dOptions));
+                World.add(engine.world, [disk[count]]);
+                count++;
+          
+            }
+            else if(count == 1 && phone < 10)
+            {
+                if (Matter.Collision.collides(disk[0], ground1) != null) 
+                {
+                    document.getElementById("number").innerHTML += "1";
+                    phone ++;
+                    if(phone==3)
+                    {
+                        document.getElementById("number").innerHTML += ") ";
+    
+                    }
+                    if(phone == 6)
+                    {
+                        document.getElementById("number").innerHTML += " - ";
+                    }   
+                }
+                if (Matter.Collision.collides(disk[0], ground2) != null) 
+                {
+                    document.getElementById("number").innerHTML += "2";
+                    phone ++;
+                    if(phone==3)
+                    {
+                        document.getElementById("number").innerHTML += ") ";
+    
+                    }
+                    if(phone == 6)
+                    {
+                        document.getElementById("number").innerHTML += " - ";
+                    }   
+                }
+                if (Matter.Collision.collides(disk[0], ground3) != null) 
+                {
+                    document.getElementById("number").innerHTML += "3";
+                    phone ++;
+                    if(phone==3)
+                    {
+                        document.getElementById("number").innerHTML += ") ";
+    
+                    }
+                    if(phone == 6)
+                    {
+                        document.getElementById("number").innerHTML += " - ";
+                    }   
+                }
+                if (Matter.Collision.collides(disk[0], ground4) != null) 
+                {
+                    document.getElementById("number").innerHTML += "4";
+                    phone ++;
+                    if(phone==3)
+                    {
+                        document.getElementById("number").innerHTML += ") ";
+    
+                    }
+                    if(phone == 6)
+                    {
+                        document.getElementById("number").innerHTML += " - ";
+                    }   
+                }
+                if (Matter.Collision.collides(disk[0], ground5) != null) 
+                {
+                    document.getElementById("number").innerHTML += "5";
+                    phone ++;
+                    if(phone==3)
+                    {
+                        document.getElementById("number").innerHTML += ") ";
+    
+                    }
+                    if(phone == 6)
+                    {
+                        document.getElementById("number").innerHTML += " - ";
+                    }   
+                }
+                if (Matter.Collision.collides(disk[0], ground6) != null) 
+                {
+                    document.getElementById("number").innerHTML += "6";
+                    phone ++;
+                    if(phone==3)
+                    {
+                        document.getElementById("number").innerHTML += ") ";
+    
+                    }
+                    if(phone == 6)
+                    {
+                        document.getElementById("number").innerHTML += " - ";
+                    }   
+                }
+                if (Matter.Collision.collides(disk[0], ground7) != null) 
+                {
+                    document.getElementById("number").innerHTML += "7";
+                    phone ++;
+                    if(phone==3)
+                    {
+                        document.getElementById("number").innerHTML += ") ";
+    
+                    }
+                    if(phone == 6)
+                    {
+                        document.getElementById("number").innerHTML += " - ";
+                    }   
+                }
+                if (Matter.Collision.collides(disk[0], ground8) != null) 
+                {
+                    document.getElementById("number").innerHTML += "8";
+                    phone ++;
+                    if(phone==3)
+                    {
+                        document.getElementById("number").innerHTML += ") ";
+    
+                    }
+                    if(phone == 6)
+                    {
+                        document.getElementById("number").innerHTML += " - ";
+                    }   
+                }
+                if (Matter.Collision.collides(disk[0], ground9) != null) 
+                {
+                    document.getElementById("number").innerHTML += "9";
+                    phone ++;
+                    if(phone==3)
+                    {
+                        document.getElementById("number").innerHTML += ") ";
+    
+                    }
+                    if(phone == 6)
+                    {
+                        document.getElementById("number").innerHTML += " - ";
+                    }   
+                }
+                if (Matter.Collision.collides(disk[0], ground0) != null) 
+                {
+                    document.getElementById("number").innerHTML += "0";
+                    phone ++;
+                    if(phone==3)
+                    {
+                        document.getElementById("number").innerHTML += ") ";
+    
+                    }
+                    if(phone == 6)
+                    {
+                        document.getElementById("number").innerHTML += " - ";
+                    }   
+                }
+                Matter.World.remove(engine.world, disk[0]);
+                disk.pop();
+                count--;
+            }
+        }
+        // create ground sky and walls
+        const ground1 = Bodies.rectangle(40, 610, 80, 60, {
+          isStatic: true
+        });
+        const ground2 = Bodies.rectangle(120, 610, 80, 60, {
+          isStatic: true
+        });
+        const ground3 = Bodies.rectangle(200, 610, 80, 60, {
+          isStatic: true
+        });
+        const ground4 = Bodies.rectangle(280, 610, 80, 60, {
+          isStatic: true
+        });
+        const ground5 = Bodies.rectangle(360, 610, 80, 60, {
+          isStatic: true
+        });
+        const ground6 = Bodies.rectangle(440, 610, 80, 60, {
+          isStatic: true
+        });
+        const ground7 = Bodies.rectangle(520, 610, 80, 60, {
+          isStatic: true
+        });
+        const ground8 = Bodies.rectangle(600, 610, 80, 60, {
+          isStatic: true
+        });
+        const ground9 = Bodies.rectangle(680, 610, 80, 60, {
+          isStatic: true
+        });
+        const ground0 = Bodies.rectangle(760, 610, 80, 60, {
+          isStatic: true
+        });
+        const leftWall = Bodies.rectangle(0, 305, 2, 810, {
+          isStatic: true
+        });
+        const righttWall = Bodies.rectangle(800, 305, 2, 810, {
+          isStatic: true
+        });
+        const sky = Bodies.rectangle(400, 0, 810, 2, {
+          isStatic: true
+        });
+        const startLine = Bodies.rectangle(400, 110, 810, 2, {
+          isStatic: true
+        });
+        startLine.collisionFilter = {
+            'group': -1,
+            'category': 2,
+            'mask': 0,
+        };
+        
+    
+    // returns either true or false depending on if the two objects are colliding 
+        
+        // add all of the bodies to the world
+        World.add(engine.world, [sky, righttWall, leftWall, ground1, ground2, ground3, ground4, ground5, ground6, ground7,ground8, ground9, ground0, startLine]);
+    
+        // run the engine
+        Engine.run(engine);
+        
+        // run the renderer
+        Render.run(render);
+      </script>
+  </body>
+  
+</html>
