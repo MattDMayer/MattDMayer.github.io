@@ -14,7 +14,7 @@
 
       <h3 id="number">Enter Phone Number: </h3>   
       <button onClick="window.location.reload();">Refresh Page</button> 
-      <button onClick="window.location.reload();">Submit</button>  
+      <button onClick= "submit()">Submit</button>  
       <p> </p>
       <aside onclick="addD()" id="can"></aside>
     <h2>1 2 3 4 5 6 7 8 9 0</h2>
@@ -323,6 +323,15 @@
         
         // run the renderer
         Render.run(render);
+
+        function submit(){
+          if(phone==10){
+          alert("Phone number entered");
+        }
+          else{
+            alert("Not a 10 digit phone number");
+          }
+        }
       </script>
   </body>
   
