@@ -1,3 +1,4 @@
+ <!--Starting code taken from https://codesandbox.io/p/sandbox/charming-sunset-t7s794, modified heavily for my project-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +9,9 @@
     <link rel="stylesheet" href="js.css">
 </head>
 <body>
-      <h1>Clicking will first spawn and then retrieve ball and record digit.</h1>
-      <h4>Click above the line.</h4>
+      <h1>Clicking will first spawn and then retrieve ball and record digit. Make sure to click above the line</h1>
       <h4>Make sure the ball is on the ground of the pocket before retrieving it to store number.</h4>
-
+      <h4>Special thanks to https://codesandbox.io/p/sandbox/charming-sunset-t7s794 for starting code!</h4>
       <h3 id="number">Enter Phone Number: </h3>   
       <button onClick="window.location.reload();">Refresh Page</button> 
       <button onClick= "submit()">Submit</button>  
@@ -35,7 +35,7 @@
           engine: engine,
           options: {
             wireframes: false,
-            background: 'green'
+            background: 'rgb(89,195,195)'
           }
         });
         // create flanges
